@@ -40,7 +40,8 @@ public String deleteBook(@PathVariable("id") Long id) {
 
 @GetMapping("/edit/{id}")
 public String editBook(@PathVariable("id") Long id, Model model) {
-    model.addAttribute("book", repository.findById(id));
+    Book book = repository.findById(id).orElse(null);
+    model.addAttribute("book", book);
     return "addbook";
 }
 }
