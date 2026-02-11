@@ -2,6 +2,7 @@ package bookstore.web;
 
 import bookstore.domain.Book;
 import bookstore.domain.BookRepository;
+import bookstore.domain.CategoryRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +22,9 @@ public class BookController {
         return "booklist";
     }
     @GetMapping("/add")
-public String addBook(Model model) {
+    public String addBook(Model model) {
     model.addAttribute("book", new Book());
+    model.addAttribute("categories", categoryRepository.findAll());
     return "addbook";
 }
 
@@ -42,6 +44,18 @@ public String deleteBook(@PathVariable("id") Long id) {
 public String editBook(@PathVariable("id") Long id, Model model) {
     Book book = repository.findById(id).orElse(null);
     model.addAttribute("book", book);
+    model.addAttribute("categories", categoryRepository.findAll());
     return "addbook";
 }
+private final CategoryRepository categoryRepository;
+
+public BookController(BookRepository repository, CategoryRepository categoryRepository) {
+    this.repository = repository;
+    this.categoryRepository = categoryRepository;
 }
+
+
+
+}
+
+

@@ -1,12 +1,18 @@
 package bookstore.domain;
 
 import jakarta.persistence.*;
+
 @Entity
 public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "categoryid")
+    private Category category;
+
 
     private String title;
     private String author;
@@ -21,6 +27,7 @@ public class Book {
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;
+        this.category = category;
         this.isbn = isbn;
         this.price = price;
     }
@@ -65,4 +72,13 @@ public class Book {
     public void setPrice(double price) { 
         this.price = price; 
     }
+    public Category getCategory() {
+    return category;
+
+    }
+
+    public void setCategory(Category category) {
+    this.category = category;
 }
+}
+
