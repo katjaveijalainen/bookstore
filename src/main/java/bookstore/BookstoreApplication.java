@@ -16,18 +16,15 @@ public class BookstoreApplication {
         SpringApplication.run(BookstoreApplication.class, args);
     }
 
-    @Bean
-    public CommandLineRunner demo(BookRepository bookRepo, CategoryRepository catRepo) {
+ @Bean
+public CommandLineRunner demo(BookRepository bookRepo, CategoryRepository catRepo) {
     return (args) -> {
-        
+
         Category c1 = catRepo.save(new Category("Fantasy"));
         Category c2 = catRepo.save(new Category("Classic"));
-            repo.save(new Book("Humiseva Harju", "Emily Bronte", 2008, "12345", 25.60));
-            repo.save(new Book("Harry Potter ja Viisasten kivi", "J.K.Rowling", 2018, "67890", 15.70));
-        };
-    }
+
+        bookRepo.save(new Book("Humiseva Harju", "Emily Bronte", 2008, "12345", 25.60, c2));
+        bookRepo.save(new Book("Harry Potter ja Viisasten kivi", "J.K.Rowling", 2018, "67890", 15.70, c1));
+    };
 }
-
-
-
-
+}

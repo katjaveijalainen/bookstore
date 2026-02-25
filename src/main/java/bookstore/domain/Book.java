@@ -1,6 +1,7 @@
 package bookstore.domain;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Book {
@@ -11,6 +12,7 @@ public class Book {
 
     @ManyToOne
     @JoinColumn(name = "categoryid")
+    @JsonIgnoreProperties("books")
     private Category category;
 
 
@@ -23,13 +25,13 @@ public class Book {
     public Book() {
     }
 
-    public Book(String title, String author, int publicationYear, String isbn, double price) {
+    public Book(String title, String author, int publicationYear, String isbn, double price, Category category) {
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;
-        this.category = category;
         this.isbn = isbn;
         this.price = price;
+        this.category = category;
     }
      public Long getId() { 
          return id; 
