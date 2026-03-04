@@ -59,6 +59,10 @@ public @ResponseBody Iterable<Book> getBooksRest() {
 public @ResponseBody Book getBookRest(@PathVariable("id") Long id) {
     return repository.findById(id).orElse(null);
 }
+@GetMapping("/login")
+public String login() {
+    return "login";
+}
 }
 
 
